@@ -1,43 +1,24 @@
-<div id="modal" class="uk-modal">
-    <div class="uk-modal-dialog">
-        <a class="uk-modal-close uk-close"></a>
-        <form>
-          <label>
-            Ваше имя:
-            <input type="text" name="" placeholder="Ваше имя">
-          </label>
-          <label>
-            Ваше email:
-            <input type="email" name="" placeholder="Ваш email">
-          </label>
-          <label>
-            Ваш вопрос:
-            <textarea placeholder="Ваш вопрос"></textarea>
-          </label>
-          <button class="but white" type="submit">Отправить</button>
-        </form>
-    </div>
-</div>
+<app-feedbackmodal></app-feedbackmodal>
 
 <header>
   <div class="def-content">
     <menu>
       <ul>
         <li>
-          <a href="index.html">Главная</a>
+          <a routerLink="home" href="index.html">Главная</a>
         </li>
         <li>
-          <a href="news.html">Новости</a>
+          <a routerLink="news">Новости</a>
         </li>
         <li>
-          <a href="nahodki.html">Находки</a>
+          <a routerLink="finds">Находки</a>
         </li>
       </ul>
     </menu>
     <menu>
       <ul>
         <li>
-          <a href="settings.html">Личный кабинет</a>
+          <a routerLink="profile">Личный кабинет</a>
         </li>
         <li>
           <a href="">Выход</a>
@@ -47,29 +28,4 @@
   </div>
 </header>
 
-<div class="def-content">
-  <div class="content">
-    <div class="col-left">
-      <div class="col-block map"></div>
-    </div>
-    <div class="col-right">
-      <div class="col-block info">
-        Мой баланс: 70 Р
-        <div class="h1">
-          Мои карты:
-        </div>
-        <div class="line-cols">
-          <div class="col">Карта №123123123 (373p.)</div>
-          <div class="col"><a href="">Пополнить</a></div>
-        </div>
-        <div class="line-cols">
-          <div class="col">Карта №123123123 (373p.)</div>
-          <div class="col"><a href="">Пополнить</a></div>
-        </div>
-      </div>
-      <div class="col-block time"></div>
-      <div class="col-block news"></div>
-      <button class="but" data-uk-modal="{target:'#modal'}">Обратная связь</button>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet>
