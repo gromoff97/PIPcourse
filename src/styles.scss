@@ -1,1 +1,369 @@
-/* You can add global styles to this file, and also import other style files */
+body, menu, aside, section, article {
+  margin: 0vw;
+  padding: 0vw; }
+article {
+  z-index: 2; }
+a.uk-icon-close,a.uk-modal-close.uk-close{
+  text-decoration:none !important;
+  color: #000;
+}
+a{
+  text-decoration:underline !important;
+}
+i{
+  display: inline-block;
+  vertical-align: middle;
+}
+html {height: 100%}
+/*Переменные и миксины*/
+@mixin shadow{
+  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+@mixin inline{
+  display: inline-block;
+  vertical-align: middle;
+}
+@mixin box{
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@mixin flex($x,$y,$w){
+  display: flex;
+  align-items: $x;
+  flex-wrap: $w;
+  justify-content: $y;
+}
+$family-Roboto: 'Roboto', sans-serif;
+/*Инструменты*/
+body {
+  color: #212121;
+  background-color: #f1f1f1;
+  font-size: 16px;
+  line-height: 18px;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-family: $family-Roboto;
+}
+/*@include flex (center,space-between,nowrap);*/
+.def-content{
+  max-width: 1200px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  padding: 16px 0;
+  @include box;
+}
+header{
+  .def-content{
+    @include flex (center,space-between,nowrap);
+  }
+}
+menu{
+  display: inline-block;
+  ul{
+    display: block;
+    padding: 0;
+    li{
+      padding: 5px 10px;
+      display: inline;
+      vertical-align: middle;
+      a{
+        display: inline-block;
+      }
+      border-right:1px #000 solid;
+    }
+    li:last-child{
+      border-right: 0;
+    }
+  }
+}
+[class^="col-"]{
+  position: relative;
+}
+.content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .col-left{
+    width: 60%;
+  }
+  .col-right{
+    width: 35%;
+  }
+  .col-main{
+    width: 100%;
+  }
+}
+.col-block{
+  padding: 16px;
+  @include box;
+  background: #fff;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.col-block.map{
+  height: 100%;
+  position: relative;
+}
+.col-block.info{
+  height: 250px;
+  margin-bottom: 20px;
+  overflow-y: scroll;
+  .h1{
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+}
+.col-block.time{
+  min-height: 180px;
+  margin-bottom: 20px;
+}
+.col-block.news{
+  min-height: 180px;
+  margin-bottom: 20px;
+}
+.but{
+  outline: none;
+  border:0;
+  background: #777;
+  border-radius: 6px;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+  @include box;
+  font-family: $family-Roboto;
+}
+button:hover{
+  cursor: pointer;
+box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.but.white{
+  border:1px #777 solid;
+  background: #fff;
+  color: #000;
+  padding: 10px;
+  width: auto;
+}
+input,textarea{
+  @include box;
+  border-radius: 6px;
+  border:1px #777 solid;
+  padding: 10px;
+  width: 240px;
+  font-family: $family-Roboto;
+}
+textarea{
+  resize: none;
+  outline: none;
+}
+.line-cols{
+  @include flex (center,space-between,nowrap);
+  padding: 5px 0;
+  font-size: 14px;
+  .col{
+    display: inline-block;
+  }
+}
+.col-block.form{
+  margin-bottom: 20px;
+  .h1{
+    padding:10px 0 10px 0;
+    border-bottom: 1px #777 solid;
+    margin-bottom: 10px;
+  }
+}
+.col-block form{
+  @include box;
+  padding: 0 100px;
+  @include flex (center,space-between,wrap);
+  input{
+    display: inline;
+    vertical-align: middle;
+  }
+  .def-w-2{
+    white-space: nowrap;
+    padding: 10px 20px;
+    width: 50%;
+    @include box;
+    text-align: right;
+    @include flex (center,space-between,nowrap);
+    padding-right: 100px;
+  }
+  .def-w-2.left{
+    padding-right: 100px;
+  }
+  .def-w-2.but-left{
+    text-align: left !important;
+    .but.white{
+      display: inline-block;
+    }
+  }
+}
+  .left-radius{
+    border-radius: 6px 0 0 6px;
+  }
+  .right-radius{
+    border-radius: 0 6px 6px 0;
+  }
+  .col-form{
+    input,button{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    button{
+      margin-left: -1px;
+    }
+  }
+.col-block-form{
+  margin-bottom: 20px;
+  textarea{
+    height: 180px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+.col-block.window-box{
+  height: 100%;
+  overflow-y: auto;
+}
+.window{
+  font-size: 14px;
+  background: #c9c9c9;
+  padding: 16px;
+  @include box;
+  border-radius: 6px;
+  @include flex (flex-start,space-between,nowrap);
+  margin-bottom: 16px;
+  .content{
+    width: 450px;
+    padding: 0 20px;
+  }
+}
+.window:last-child{
+  margin-bottom: 0;
+}
+.col-block.window-box.comments{
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  margin-bottom: 40px;
+  .window{
+    position: relative;
+    display: block;
+    .name{
+      margin-bottom: 16px;
+    }
+    .content{
+      padding: 0;
+      width: 100%;
+    }
+    a.uk-icon-close{
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+  }
+}
+.col-main.but-col{
+  text-align: right;
+  .col-right{
+    display: inline-block;
+  }
+}
+.uk-modal-dialog{
+  border-radius: 6px;
+  padding: 30px !important;
+  position: relative;
+  a.uk-modal-close.uk-close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+  label{
+    display: block;
+    margin-bottom: 15px;
+    input,textarea{
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+}
+@media screen and (max-width: 1200px){
+  .def-content{
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .col-block form{
+    padding: 0 16px;
+  }
+  .col-block form .def-w-2{
+    padding-right: 0;
+    display: block;
+    white-space: normal;
+    text-align: left;
+    input{
+      width: 100%;
+      margin-top: 5px;
+    }
+  }
+  .col-block form .def-w-2.left{
+    padding-right: 0;
+  }
+}
+@media screen and (max-width: 700px){
+  .content{
+    .col-left,.col-right{
+      width: 100%;
+    }
+    .col-left{
+      margin-bottom: 20px;
+    }
+    .col-block.map{
+      height: 400px;
+    }
+  }
+  header{
+    .def-content{
+      @include flex (center,flex-start,nowrap);
+      menu:last-child{
+        li:first-child{
+          border-left:1px #000 solid;
+        }
+      }
+    }
+  }
+  .col-block form{
+    display: block;
+  }
+  .col-block form .def-w-2{
+    width: 100%;
+    padding-left: 0;
+  }
+}
+@media screen and (max-width: 500px){
+header{
+  .def-content{
+    display: block;
+  }
+}
+menu{
+  display: block;
+  ul{
+    display: block;
+    padding: 0;
+    margin: 0;
+    li{
+      display: block;
+      border: none !important;
+      text-align: center;
+    }
+  }
+}
+}
