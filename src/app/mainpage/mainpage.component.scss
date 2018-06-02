@@ -1,0 +1,16 @@
+@import "mask.css";
+
+.scheme {
+  position: relative;
+  padding: 0;
+}
+
+.mask {
+  position: absolute;
+  cursor: pointer;
+}
+
+.scheme>img {
+  display: block;
+  width: 100%;
+}

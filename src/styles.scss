@@ -107,7 +107,6 @@ menu{
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .col-block.map{
-  height: 100%;
   position: relative;
 }
 .col-block.info{
@@ -324,9 +323,6 @@ textarea{
     }
     .col-left{
       margin-bottom: 20px;
-    }
-    .col-block.map{
-      height: 400px;
     }
   }
   header{
