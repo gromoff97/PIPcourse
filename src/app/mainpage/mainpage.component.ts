@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-mainpage',
@@ -12,6 +12,9 @@ export class MainpageComponent implements OnInit {
   pathtime: string;
   path: string;
 
+  private firstStation = true;
+  private stationsAssoc = {};
+
   _http: HttpClient;
   stationFrom: string = null;
   stationTo: string = null;
@@ -22,6 +25,7 @@ export class MainpageComponent implements OnInit {
   }
 
   fillLastNewsPost() {
+    this.lastPost = 'Подождите...';
     this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
     .subscribe(data => {
       this.lastPost = data.body[Object.keys(data.body).length - 1].content;
@@ -54,9 +58,10 @@ export class MainpageComponent implements OnInit {
   }
 
   fillPathResult() {
+    this.pathtime = 'Подождите...';
+    this.path = '';
     if ( this.stationFrom === this.stationTo ) {
       this.pathtime = 'Пожалуйста, выберите разные станции';
-      this.path = '';
       return;
     }
 
@@ -88,20 +93,52 @@ export class MainpageComponent implements OnInit {
   ngOnInit() {
     this.fillLastNewsPost();
     this.fillSelectors();
+
+    this.stationsAssoc['kirpich'] = 'Кирпичная';
+    this.stationsAssoc['mudr'] = 'Страшилы Мудрого';
+    this.stationsAssoc['volsheb'] = 'Волшебная';
+    this.stationsAssoc['stelly'] = 'Стеллы';
+    this.stationsAssoc['ludoed'] = 'Людоедная';
+    this.stationsAssoc['lvinaya'] = 'Львиная';
+    this.stationsAssoc['gudvina'] = 'Гудвина';
+    this.stationsAssoc['krug'] = 'Кругосветная';
+    this.stationsAssoc['izumrud'] = 'Изумрудная';
+    this.stationsAssoc['ovrazh'] = 'Овражная';
   }
 
- selectorOneChanged(event) {
+  selectorOneChanged(event) {
    this.stationFrom = event.target.value;
    if ( this.stationTo != null ) {
      this.fillPathResult();
    }
  }
 
- selectorTwoChanged(event) {
+  selectorTwoChanged(event) {
    this.stationTo = event.target.value;
    if ( this.stationFrom != null ) {
      this.fillPathResult();
    }
+ }
+
+  stationClick(event) {
+    const targetStation = this.stationsAssoc[event.target.id];
+    const station_selectors = <HTMLCollectionOf<HTMLSelectElement>>document.getElementsByClassName('select-flex');
+    const selectorLen = station_selectors[0].length;
+    let requiredItem: number;
+    for (let itemIndex = 0; itemIndex < selectorLen; itemIndex++) {
+      if (station_selectors[0].options[itemIndex].text === targetStation) {
+        requiredItem = itemIndex;
+      }
+    }
+    if (this.firstStation) {
+      this.stationFrom = targetStation;
+      station_selectors[0].selectedIndex = requiredItem;
+    } else {
+      this.stationTo = targetStation;
+      station_selectors[1].selectedIndex = requiredItem;
+      this.fillPathResult();
+    }
+    this.firstStation = !this.firstStation;
  }
 
 }
