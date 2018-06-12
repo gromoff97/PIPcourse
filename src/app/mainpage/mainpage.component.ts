@@ -8,6 +8,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MainpageComponent implements OnInit {
 
+  lastPost: string;
+  pathtime: string;
+  path: string;
+
   _http: HttpClient;
   stationFrom: string = null;
   stationTo: string = null;
@@ -20,7 +24,7 @@ export class MainpageComponent implements OnInit {
   fillLastNewsPost() {
     this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
     .subscribe(data => {
-      document.getElementById('lastnewspost').innerHTML = data.body[Object.keys(data.body).length - 1].content;
+      this.lastPost = data.body[Object.keys(data.body).length - 1].content;
     });
   }
 
@@ -50,9 +54,9 @@ export class MainpageComponent implements OnInit {
   }
 
   fillPathResult() {
-    const res = document.getElementById('pathres');
     if ( this.stationFrom === this.stationTo ) {
-      res.innerHTML = 'Пожалуйста, выберите разные станции';
+      this.pathtime = 'Пожалуйста, выберите разные станции';
+      this.path = '';
       return;
     }
 
@@ -75,9 +79,8 @@ export class MainpageComponent implements OnInit {
       const time = Object.values(data.body)[1];
       const min = Math.floor(time / 60);
       const sec = time - min * 60;
-      res.innerHTML = 'Время прибытия составляет ' + min + ':' + sec.toString().padStart(2, '0') + ' минут' +
-      ';<div>Добраться можно по следующему алгоритму : ' + Object.values(data.body)[0] + '</div>';
-      console.log(data);
+      this.pathtime = 'Время прибытия составляет ' + min + ':' + sec.toString().padStart(2, '0') + ' минут';
+      this.path = 'Добраться можно по следующему алгоритму : ' + Object.values(data.body)[0];
     });
 
   }

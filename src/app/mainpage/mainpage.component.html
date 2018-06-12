@@ -43,11 +43,12 @@
             <select class="select-flex" (change)="selectorTwoChanged($event)">
               <option disabled selected value>Выберите станцию</option>
             </select>
-            <div id="pathres"></div>
+            <div>{{pathtime}}</div>
+            <div>{{path}}</div>
           </label>
         </div>
       </div>
-      <div id="lastnewspost" class="col-block news">последняя новость</div>
+      <div class="col-block news">{{lastPost}}</div>
       <button class="but" data-uk-modal="{target:'#feedback'}">Обратная связь</button>
     </div>
   </div>
