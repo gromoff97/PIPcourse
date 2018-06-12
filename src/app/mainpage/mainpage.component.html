@@ -30,7 +30,23 @@
           <div class="col"><a href="">Пополнить</a></div>
         </div>
       </div>
-      <div class="col-block time">расчёт времени</div>
+      <div class="col-block time">
+        <div class="line-block">
+          <label>
+            <p>От:</p>
+            <select class="select-flex" (change)="selectorOneChanged($event)">
+              <option disabled selected value>Выберите станцию</option>
+            </select>
+          </label>
+          <label>
+            <p>До:</p>
+            <select class="select-flex" (change)="selectorTwoChanged($event)">
+              <option disabled selected value>Выберите станцию</option>
+            </select>
+            <div id="pathres"></div>
+          </label>
+        </div>
+      </div>
       <div id="lastnewspost" class="col-block news">последняя новость</div>
       <button class="but" data-uk-modal="{target:'#feedback'}">Обратная связь</button>
     </div>
