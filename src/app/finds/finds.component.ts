@@ -14,11 +14,18 @@ export class FindsComponent implements OnInit {
     this._http = gotHttp;
   }
 
+  fillLastNewsPost() {
+    this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
+      .subscribe(data => {
+        document.getElementById('lastnewspost').innerHTML = data.body[Object.keys(data.body).length - 1].content;
+      });
+  }
+
   getNewFindContent( id: number, content: string ): string {
     return '<div class="window"> <div class="name">Находка №' + id + '</div><div class="content">' + content + '</div></div>';
   }
 
-  ngOnInit() {
+  fillFinds() {
     this._http.get('http://localhost:8080/course/api/lostfound/all', { observe: 'response' })
       .subscribe(data => {
         const finds = document.getElementById('finds');
@@ -31,4 +38,8 @@ export class FindsComponent implements OnInit {
       });
   }
 
+  ngOnInit() {
+    this.fillFinds();
+    this.fillLastNewsPost();
+  }
 }
