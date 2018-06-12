@@ -137,6 +137,10 @@ export class MainpageComponent implements OnInit {
     } else {
       this.stationTo = targetStation;
       station_selectors[1].selectedIndex = requiredItem;
+      if (screen.width <= 700) {
+        window.location.hash = '';
+        window.location.hash = 'result';
+      }
       this.fillPathResult();
     }
     this.firstStation = !this.firstStation;
