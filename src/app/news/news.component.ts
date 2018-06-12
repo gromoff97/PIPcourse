@@ -12,8 +12,8 @@ export class NewsComponent implements OnInit {
     this._http = gotHttp;
   }
 
-  private getNewPostContent( id: number , content: string): string {
-    return '<div class="window"><div class="name">Новость ' + id + '</div><div class="content">' + content + '</div></div>';
+  private static getNewPostContent( id: number, date: string, content: string): string {
+    return '<div class="window"><div class="name">Новость ' + id + ' (' + date + ')</div><div class="content">' + content + '</div></div>';
   }
 
 
@@ -24,7 +24,8 @@ export class NewsComponent implements OnInit {
         let newsHtml = '';
         const news_count: number = Object.keys(data.body).length;
         for ( let news_counter = 0; news_counter < news_count; news_counter++ ) {
-          newsHtml = this.getNewPostContent(news_counter + 1, data.body[news_counter].content) + newsHtml;
+          const post = data.body[news_counter];
+          newsHtml = NewsComponent.getNewPostContent(news_counter + 1, post.pubDate, post.content) + newsHtml;
         }
         news.innerHTML = newsHtml;
       });
