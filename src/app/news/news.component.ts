@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-news',
@@ -20,7 +21,7 @@ export class NewsComponent implements OnInit {
   ngOnInit() {
     const news = document.getElementById('news');
     news.innerHTML = 'Подождите...';
-    this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
+    this._http.get(AppComponent.apiUrl + '/news/all', { observe: 'response' })
       .subscribe(data => {
         let newsHtml = '';
         const news_count: number = Object.keys(data.body).length;

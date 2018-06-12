@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-finds',
@@ -23,7 +24,7 @@ export class FindsComponent implements OnInit {
 
   fillLastNewsPost() {
     this.lastNewsPost = 'Подождите...';
-    this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
+    this._http.get(AppComponent.apiUrl + '/news/all', { observe: 'response' })
       .subscribe(data => {
         this.lastNewsPost = data.body[Object.keys(data.body).length - 1].content;
       });
@@ -32,7 +33,7 @@ export class FindsComponent implements OnInit {
   fillFinds() {
     const finds = document.getElementById('finds');
     finds.innerHTML = 'Подождите...';
-    this._http.get('http://localhost:8080/course/api/lostfound/all', { observe: 'response' })
+    this._http.get(AppComponent.apiUrl + '/lostfound/all', { observe: 'response' })
       .subscribe(data => {
         const finds_count: number = Object.keys(data.body).length;
         let newsHtml = '';

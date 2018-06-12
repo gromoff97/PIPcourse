@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-mainpage',
@@ -26,14 +27,14 @@ export class MainpageComponent implements OnInit {
 
   fillLastNewsPost() {
     this.lastPost = 'Подождите...';
-    this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
+    this._http.get(AppComponent.apiUrl + '/news/all', { observe: 'response' })
     .subscribe(data => {
       this.lastPost = data.body[Object.keys(data.body).length - 1].content;
     });
   }
 
   fillSelectors() {
-    this._http.get('http://localhost:8080/course/api/stations/all', { observe: 'response' })
+    this._http.get(AppComponent.apiUrl + '/stations/all', { observe: 'response' })
     .subscribe(data => {
       const station_selectors = document.getElementsByClassName('select-flex');
 
@@ -78,7 +79,7 @@ export class MainpageComponent implements OnInit {
       }
     });
 
-    this._http.get('http://localhost:8080/course/api/path/min/' + stationFromId + '/' + stationToId,
+    this._http.get(AppComponent.apiUrl + '/path/min/' + stationFromId + '/' + stationToId,
       { observe: 'response' })
     .subscribe(data => {
       const time = Object.values(data.body)[1];
