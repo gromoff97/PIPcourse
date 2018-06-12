@@ -16,16 +16,17 @@ export class FindsComponent implements OnInit {
     this._http = gotHttp;
   }
 
+  private static getNewFindContent( id: number, date: string, content: string ): string {
+    return '<div class="window"> <div class="name">Находка №' + id + ' (' + date + ')</div><div class="content">' +
+      content + '</div></div>';
+  }
+
   fillLastNewsPost() {
     this.lastNewsPost = 'Подождите...';
     this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
       .subscribe(data => {
         this.lastNewsPost = data.body[Object.keys(data.body).length - 1].content;
       });
-  }
-
-  getNewFindContent( id: number, content: string ): string {
-    return '<div class="window"> <div class="name">Находка №' + id + '</div><div class="content">' + content + '</div></div>';
   }
 
   fillFinds() {
@@ -36,7 +37,8 @@ export class FindsComponent implements OnInit {
         const finds_count: number = Object.keys(data.body).length;
         let newsHtml = '';
         for ( let finds_counter = 0; finds_counter < finds_count; finds_counter++ ) {
-          newsHtml = this.getNewFindContent(finds_counter + 1, data.body[finds_counter].message) + newsHtml;
+          const post = data.body[finds_counter];
+          newsHtml = FindsComponent.getNewFindContent(finds_counter + 1, post.pubDate, post.message) + newsHtml;
         }
         finds.innerHTML = newsHtml;
       });
