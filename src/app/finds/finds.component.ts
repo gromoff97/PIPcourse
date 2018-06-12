@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FindsComponent implements OnInit {
 
+  lastNewsPost: string;
+
   _http: HttpClient;
 
   constructor( private gotHttp: HttpClient ) {
@@ -15,9 +17,10 @@ export class FindsComponent implements OnInit {
   }
 
   fillLastNewsPost() {
+    this.lastNewsPost = 'Подождите...';
     this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
       .subscribe(data => {
-        document.getElementById('lastnewspost').innerHTML = data.body[Object.keys(data.body).length - 1].content;
+        this.lastNewsPost = data.body[Object.keys(data.body).length - 1].content;
       });
   }
 
@@ -26,9 +29,10 @@ export class FindsComponent implements OnInit {
   }
 
   fillFinds() {
+    const finds = document.getElementById('finds');
+    finds.innerHTML = 'Подождите...';
     this._http.get('http://localhost:8080/course/api/lostfound/all', { observe: 'response' })
       .subscribe(data => {
-        const finds = document.getElementById('finds');
         const finds_count: number = Object.keys(data.body).length;
         let newsHtml = '';
         for ( let finds_counter = 0; finds_counter < finds_count; finds_counter++ ) {
