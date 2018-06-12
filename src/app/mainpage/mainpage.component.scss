@@ -14,3 +14,19 @@
   display: block;
   width: 100%;
 }
+
+.line-block label{
+	display: block;
+}
+
+.line-block p{
+	display: inline-block;
+	padding: 3px 0 6px 0;
+	width: 20px;
+}
+
+.select-flex{
+	display: inline-block;
+	margin-left: 10px;
+	width: 100px;
+}
