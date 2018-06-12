@@ -18,9 +18,10 @@ export class NewsComponent implements OnInit {
 
 
   ngOnInit() {
+    const news = document.getElementById('news');
+    news.innerHTML = 'Подождите...';
     this._http.get('http://localhost:8080/course/api/news/all', { observe: 'response' })
       .subscribe(data => {
-        const news = document.getElementById('news');
         let newsHtml = '';
         const news_count: number = Object.keys(data.body).length;
         for ( let news_counter = 0; news_counter < news_count; news_counter++ ) {
