@@ -12,6 +12,19 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import {StompConfig, StompService} from '@stomp/ng2-stompjs';
+
+const stompConfig: StompConfig = {
+  url: 'ws://127.0.0.1:15674/ws',
+  headers: {
+    login: 'guest',
+    passcode: 'guest'
+  },
+  heartbeat_in: 0,
+  heartbeat_out: 20000,
+  reconnect_delay: 5000,
+  debug: false
+};
 
 @NgModule({
   declarations: [
@@ -27,7 +40,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    StompService,
+    {
+      provide: StompConfig,
+      useValue: stompConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
