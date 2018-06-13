@@ -4,10 +4,10 @@
       <div id="finds" class="col-block window-box"></div>
     </div>
     <div class="col-right">
-      <form class="col-block-form">
-        <textarea placeholder="Поле ввода"></textarea>
-        <button type="submit" class="but">Заявить о находке</button>
-      </form>
+      <div class="col-block-form">
+        <textarea id="newPost" placeholder="Поле ввода"></textarea>
+        <button type="button" class="but" (click)="addLostFound()">Заявить о находке</button>
+      </div>
       <div class="col-block news">{{lastNewsPost}}</div>
       <button class="but" data-uk-modal="{target:'#feedback'}">Обратная связь</button>
     </div>
