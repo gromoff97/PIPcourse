@@ -51,13 +51,13 @@ export class FindsComponent implements OnInit {
   }
 
   addLostFound() {
-    const newPost = <HTMLTextAreaElement>document.getElementById('newPost');
-    const content = newPost.value;
-    newPost.value = 'Подождите...';
+    const newLostFound = <HTMLTextAreaElement>document.getElementById('newLostFound');
+    const content = newLostFound.value;
+    newLostFound.value = 'Подождите...';
     this._http.post(AppComponent.apiUrl + '/lostfound/add', content, { observe: 'response' })
       .subscribe(data => {
         if (data.body === true) {
-          newPost.value = '';
+          newLostFound.value = '';
           this.fillFinds();
         }
       });
