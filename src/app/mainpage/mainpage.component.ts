@@ -146,4 +146,17 @@ export class MainpageComponent implements OnInit {
     this.firstStation = !this.firstStation;
  }
 
+ addNewsPost() {
+   const newPost = <HTMLTextAreaElement>document.getElementById('newPost');
+   const content = newPost.value;
+   newPost.value = 'Подождите...';
+   this._http.post(AppComponent.apiUrl + '/news/add', content, { observe: 'response' })
+     .subscribe(data => {
+       if (data.body === true) {
+         newPost.value = '';
+         this.fillLastNewsPost();
+       }
+     });
+ }
+
 }
