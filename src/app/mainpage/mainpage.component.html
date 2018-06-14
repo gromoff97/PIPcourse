@@ -35,6 +35,10 @@
         </div>
       </div>
       <div class="col-block news">{{lastPost}}</div>
+      <div class="col-block-form">
+        <textarea id="newPost" placeholder="Сообщить что-то важное..."></textarea>
+        <button type="button" class="but" (click)="addNewsPost()">Запостить новость</button>
+      </div>
       <button class="but" data-uk-modal="{target:'#feedback'}">Обратная связь</button>
     </div>
   </div>
