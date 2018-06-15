@@ -294,6 +294,22 @@ textarea{
     }
   }
 }
+
+.notification {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 7px;
+  width: 400px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
+.uk-close.notif {
+  float: right;
+}
+
 @media screen and (max-width: 1200px){
   .def-content{
     padding-left: 16px;
@@ -341,6 +357,10 @@ textarea{
   .col-block form .def-w-2{
     width: 100%;
     padding-left: 0;
+  }
+
+  .notification {
+    width: auto;
   }
 }
 @media screen and (max-width: 500px){

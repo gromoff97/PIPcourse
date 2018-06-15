@@ -29,3 +29,8 @@
 </header>
 
 <router-outlet></router-outlet>
+
+<div id="notification" class="notification" hidden>
+  <div class="uk-close notif" (click)="notifClose()"></div>
+  {{notification}}
+</div>
