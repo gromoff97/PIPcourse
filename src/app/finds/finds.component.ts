@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {AppComponent} from '../app.component';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AppComponent, Validate} from '../app.component';
 
 @Component({
   selector: 'app-finds',
@@ -46,6 +46,7 @@ export class FindsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkIfLoggedIn();
     this.fillFinds();
     this.fillLastNewsPost();
   }
@@ -59,6 +60,19 @@ export class FindsComponent implements OnInit {
         if (data.body === true) {
           newLostFound.value = '';
           this.fillFinds();
+        }
+      });
+  }
+
+  private checkIfLoggedIn() {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Accept-API-Version', 'resource=2.1');
+    this._http.post(AppComponent.amUrl + '/json/sessions?_action=validate', null,
+      {headers: headers, observe: 'response', withCredentials: true})
+      .subscribe(validate => {
+        const result = <Validate>validate.body;
+        if (result.valid) {
+          document.getElementById('takingLostFound').hidden = false;
         }
       });
   }
