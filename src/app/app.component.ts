@@ -57,12 +57,12 @@ export class AppComponent implements OnInit {
             .subscribe(users => {
               const userinfo = <User>users.body;
               this.username = userinfo.cn[0];
+              document.getElementById('lk').hidden = false;
+              document.getElementById('logout').hidden = false;
+              document.getElementById('login').hidden = true;
+              document.getElementById('register').hidden = true;
             });
         }
-        document.getElementById('lk').hidden = !AppComponent.loggedIn;
-        document.getElementById('logout').hidden = !AppComponent.loggedIn;
-        document.getElementById('login').hidden = AppComponent.loggedIn;
-        document.getElementById('register').hidden = AppComponent.loggedIn;
       });
   }
 
