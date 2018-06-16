@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {AppComponent} from '../app.component';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AppComponent, BDUser, User, Validate} from '../app.component';
 
 @Component({
   selector: 'app-mainpage',
@@ -92,6 +92,7 @@ export class MainpageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkIfPrivilaged();
     this.fillLastNewsPost();
     this.fillSelectors();
 
@@ -156,5 +157,33 @@ export class MainpageComponent implements OnInit {
        }
      });
  }
+
+  private checkIfPrivilaged() {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Accept-API-Version', 'resource=2.1');
+    this._http.post(AppComponent.amUrl + '/json/sessions?_action=validate', null,
+      {headers: headers, observe: 'response', withCredentials: true})
+      .subscribe(validate => {
+        const result = <Validate>validate.body;
+        if (result.valid) {
+          const user = result.uid;
+          this._http.get(AppComponent.amUrl + '/json/users/' + user,
+            {headers: headers, observe: 'response', withCredentials: true})
+            .subscribe(users => {
+              const userinfo = <User>users.body;
+              this._http.get(AppComponent.apiUrl + '/users/login/' + userinfo.cn[0],
+                {observe: 'response'})
+                .subscribe(bduser => {
+                  if (bduser.status === 200) {
+                    const type = (<BDUser>bduser.body).userPermissionType.name;
+                    if ((type === 'Administrator') || (type === 'Moderator')) {
+                      document.getElementById('takeNewPost').hidden = false;
+                    }
+                  }
+                });
+            });
+        }
+      });
+  }
 
 }

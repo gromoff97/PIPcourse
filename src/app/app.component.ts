@@ -12,8 +12,6 @@ import 'rxjs/add/operator/map';
 export class AppComponent implements OnInit {
   static apiUrl = 'http://localhost:8080/course/api';
   static amUrl = 'http://localhost:9090/openam';
-  static loggedIn = false;
-  static privileged = false;
   username: string;
 
   private timer;
@@ -49,8 +47,7 @@ export class AppComponent implements OnInit {
       {headers: headers, observe: 'response', withCredentials: true})
       .subscribe(validate => {
         const result = <Validate>validate.body;
-        AppComponent.loggedIn = result.valid;
-        if (AppComponent.loggedIn) {
+        if (result.valid) {
           const user = result.uid;
           this._http.get(AppComponent.amUrl + '/json/users/' + user,
             {headers: headers, observe: 'response', withCredentials: true})
@@ -94,15 +91,30 @@ export class AppComponent implements OnInit {
   }
 }
 
-class Validate {
+export class Validate {
   valid: boolean;
   uid: string;
 }
 
-class User {
+export class User {
   username: string;
   mail: string[];
   cn: string[];
   givenName: string[];
   sn: string[];
+}
+
+export class BDUser {
+  id: number;
+  login: string;
+  firstName: string;
+  lastName: string;
+  eMail: string;
+  balance: number;
+  userPermissionType: Permission;
+}
+
+export class Permission {
+  id: number;
+  name: string;
 }

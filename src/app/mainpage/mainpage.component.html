@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="col-block news">{{lastPost}}</div>
-      <div class="col-block-form">
+      <div id="takeNewPost" class="col-block-form" hidden>
         <textarea id="newPost" placeholder="Сообщить что-то важное..."></textarea>
         <button type="button" class="but" (click)="addNewsPost()">Запостить новость</button>
       </div>
