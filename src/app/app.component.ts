@@ -98,10 +98,10 @@ export class Validate {
 
 export class User {
   username: string;
-  mail: string[];
-  cn: string[];
-  givenName: string[];
-  sn: string[];
+  mail: string[] = [];
+  cn: string[] = [];
+  givenName: string[] = [];
+  sn: string[] = [];
 }
 
 export class BDUser {

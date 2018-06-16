@@ -8,7 +8,8 @@
           <label class="def-w-2">Новый пароль <input id="newPasswd" type="password" name="" placeholder="Пароль"></label>
           <label class="def-w-2 left">ФИО <input id="FIO" type="text" name="" placeholder="ФИО"></label>
           <label class="def-w-2">Повтор пароля <input id="repeatPasswd" type="password" name="" placeholder="Пароль"></label>
-          <div class="def-w-2 left but-left"><button class="but white">Применить</button></div>
+          <div class="def-w-2 left but-left"><button type="button" class="but white" (click)="apply()">Применить</button></div>
+          <div id="errorMessageId" class="error-message">{{message}}</div>
         </form>
       </div>
     </div>
