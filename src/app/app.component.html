@@ -17,11 +17,17 @@
     </menu>
     <menu>
       <ul>
-        <li>
-          <a routerLink="profile">Личный кабинет</a>
+        <li id="lk" hidden>
+          <a routerLink="profile">Личный кабинет ({{username}})</a>
         </li>
-        <li>
-          <a href="">Выход</a>
+        <li class="no-right-border" id="logout" hidden>
+          <a (click)="logout()">Выход</a>
+        </li>
+        <li id="login">
+          <a (click)="login()">Вход</a>
+        </li>
+        <li id="register">
+          <a (click)="register()">Регистрация</a>
         </li>
       </ul>
     </menu>
