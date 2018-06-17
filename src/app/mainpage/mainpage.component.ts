@@ -148,6 +148,10 @@ export class MainpageComponent implements OnInit {
  addNewsPost() {
    const newPost = <HTMLTextAreaElement>document.getElementById('newPost');
    const content = newPost.value;
+   if ( !content ) {
+     alert('Field for post is Empty');
+     return;
+   }
    newPost.value = 'Подождите...';
    this._http.post(AppComponent.apiUrl + '/news/add', content, { observe: 'response' })
      .subscribe(data => {

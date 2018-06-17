@@ -54,6 +54,10 @@ export class FindsComponent implements OnInit {
   addLostFound() {
     const newLostFound = <HTMLTextAreaElement>document.getElementById('newLostFound');
     const content = newLostFound.value;
+    if ( !content ) {
+      alert('Field for post is Empty');
+      return;
+    }
     newLostFound.value = 'Подождите...';
     this._http.post(AppComponent.apiUrl + '/lostfound/add', content, { observe: 'response' })
       .subscribe(data => {
